@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,14 +19,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.nav.bars.MenuTopBar
-import com.example.nav.drawer.Drawer
-import com.example.nav.screens.destinations.ListItemScreenDestination
+import com.example.nav.screens.destinations.ItemScreenDestination
+import com.example.nav.ui.elements.bars.MenuTopBar
+import com.example.nav.ui.elements.drawer.Drawer
+import com.example.nav.ui.elements.drawer.DrawerItem
 import com.example.nav.ui.theme.NavigationExampleTheme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
-import java.util.UUID
+import java.util.*
 
 @Destination
 @Composable
@@ -43,11 +46,12 @@ fun ListScreen(
     Drawer(
         state = state,
         navigator = navigator,
+        currentPage = DrawerItem.List,
         content = {
             ListScreen(
                 items = exampleItems,
                 onItemClick = { _, item ->
-                    navigator.navigate(ListItemScreenDestination.invoke(item = item))
+                    navigator.navigate(direction = ItemScreenDestination.invoke(item = item))
                 },
                 onOpenDrawerClick = {
                     if (!state.isOpen) scope.launch { state.open() }
