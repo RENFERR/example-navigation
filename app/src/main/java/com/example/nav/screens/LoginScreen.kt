@@ -10,8 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.nav.screens.destinations.ListItemScreenDestination
 import com.example.nav.screens.destinations.ListScreenDestination
+import com.example.nav.screens.destinations.LoginScreenDestination
 import com.example.nav.ui.theme.NavigationExampleTheme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -25,7 +25,11 @@ fun LoginScreen(
 ) {
     LoginScreen(
         onLogin = {
-            navigator.navigate(ListScreenDestination)
+            navigator.navigate(ListScreenDestination) {
+                popUpTo(route = LoginScreenDestination.route) {
+                    inclusive = true
+                }
+            }
         }
     )
 }
