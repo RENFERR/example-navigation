@@ -1,8 +1,8 @@
-package com.example.nav.bars
+package com.example.nav.ui.elements.bars
 
 import android.widget.Toast
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -12,9 +12,9 @@ import com.example.nav.ui.theme.themedTopAppBarColors
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuTopBar(
+fun ItemTopBar(
     title: String,
-    onMenuPressed: () -> Unit
+    onBackPressed: () -> Unit
 ) {
     TopAppBar(
         title = {
@@ -24,10 +24,10 @@ fun MenuTopBar(
             )
         },
         navigationIcon = {
-            IconButton(onClick = onMenuPressed) {
+            IconButton(onClick = onBackPressed) {
                 Icon(
-                    Icons.Rounded.Menu,
-                    contentDescription = "Open drawer menu"
+                    Icons.Rounded.ArrowBack,
+                    contentDescription = "Go back"
                 )
             }
         },
@@ -37,14 +37,14 @@ fun MenuTopBar(
 
 @Preview(showBackground = true)
 @Composable
-private fun MenuTopBarPreview() {
+private fun ItemTopBarPreview() {
     val context = LocalContext.current
-    MenuTopBar(
+    ItemTopBar(
         title = "List Item",
-        onMenuPressed = {
+        onBackPressed = {
             Toast.makeText(
                 context,
-                "On menu pressed",
+                "On back pressed",
                 Toast.LENGTH_SHORT
             ).show()
         }
@@ -53,16 +53,16 @@ private fun MenuTopBarPreview() {
 
 @Preview(showBackground = true)
 @Composable
-private fun MenuTopBarPreviewLight() {
+private fun ItemTopBarPreviewLight() {
     NavigationExampleTheme(darkTheme = false) {
-        MenuTopBarPreview()
+        ItemTopBarPreview()
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-private fun MenuTopBarPreviewDark() {
+private fun ItemTopBarPreviewDark() {
     NavigationExampleTheme(darkTheme = true) {
-        MenuTopBarPreview()
+        ItemTopBarPreview()
     }
 }
