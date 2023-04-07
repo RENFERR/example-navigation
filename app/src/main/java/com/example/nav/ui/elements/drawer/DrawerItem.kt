@@ -1,4 +1,4 @@
-package com.example.nav.drawer
+package com.example.nav.ui.elements.drawer
 
 import android.os.Parcelable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,15 +15,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.nav.screens.destinations.ListScreenDestination
+import com.example.nav.screens.destinations.LoginScreenDestination
+import com.example.nav.screens.destinations.UserScreenDestination
 import com.example.nav.ui.theme.NavigationExampleTheme
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 
 @Parcelize
 sealed class DrawerItem(val title: String, val icon: @RawValue ImageVector) : Parcelable {
-    object Items : DrawerItem(title = "Items", icon = Icons.Rounded.List)
+    object List : DrawerItem(title = "Items", icon = Icons.Rounded.List)
     object User : DrawerItem(title = "User", icon = Icons.Rounded.Person)
     object Logout : DrawerItem(title = "Logout", icon = Icons.Rounded.Logout)
+
+    companion object {
+        fun DrawerItem.toRoute(): String = when (this) {
+            List -> ListScreenDestination.route
+            Logout -> LoginScreenDestination.route
+            User -> UserScreenDestination.route
+        }
+    }
 }
 
 @Composable
@@ -67,12 +78,12 @@ private fun DrawerItemPreview() {
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             DrawerItem(
-                item = DrawerItem.Items,
+                item = DrawerItem.List,
                 selected = false,
                 onClick = {}
             )
             DrawerItem(
-                item = DrawerItem.Items,
+                item = DrawerItem.List,
                 selected = true,
                 onClick = {}
             )
