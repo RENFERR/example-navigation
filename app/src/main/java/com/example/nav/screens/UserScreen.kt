@@ -8,8 +8,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.nav.bars.MenuTopBar
-import com.example.nav.drawer.Drawer
+import com.example.nav.ui.elements.bars.MenuTopBar
+import com.example.nav.ui.elements.drawer.Drawer
+import com.example.nav.ui.elements.drawer.DrawerItem
 import com.example.nav.ui.theme.NavigationExampleTheme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -26,6 +27,7 @@ fun UserScreen(
     Drawer(
         state = state,
         navigator = navigator,
+        currentPage = DrawerItem.User,
         content = {
             UserScreen(
                 username = username,
