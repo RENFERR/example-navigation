@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.nav.screens.destinations.ItemScreenDestination
+import com.example.nav.destinations.ItemScreenDestination
 import com.example.nav.ui.elements.bars.MenuTopBar
 import com.example.nav.ui.elements.drawer.Drawer
 import com.example.nav.ui.elements.drawer.DrawerItem

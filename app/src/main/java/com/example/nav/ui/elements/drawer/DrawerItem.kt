@@ -15,9 +15,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.nav.screens.destinations.ListScreenDestination
-import com.example.nav.screens.destinations.LoginScreenDestination
-import com.example.nav.screens.destinations.UserScreenDestination
+import com.example.nav.destinations.ListScreenDestination
+import com.example.nav.destinations.LoginScreenDestination
+import com.example.nav.destinations.UserScreenDestination
 import com.example.nav.ui.theme.NavigationExampleTheme
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
