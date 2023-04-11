@@ -16,6 +16,7 @@ import com.example.nav.destinations.UserScreenDestination
 import com.example.nav.ui.elements.drawer.DrawerItem.Companion.toRoute
 import com.example.nav.ui.theme.NavigationExampleTheme
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.spec.Direction
 import kotlinx.coroutines.launch
 
 @Composable
@@ -37,33 +38,25 @@ fun Drawer(
         currentPage = currentPage,
         onItemClick = { item ->
             when (item) {
-                DrawerItem.List -> navigator.list(currentRoute = currentPage.toRoute())
-                DrawerItem.Logout -> navigator.logout(currentRoute = currentPage.toRoute())
-                DrawerItem.User ->
-                    navigator.user(currentRoute = currentPage.toRoute(), argument = "MyUsername")
+                DrawerItem.List -> navigator.navigateWithPopUp(
+                    currentRoute = currentPage.toRoute(),
+                    direction = ListScreenDestination
+                )
+                DrawerItem.Logout -> navigator.navigateWithPopUp(
+                    currentRoute = currentPage.toRoute(),
+                    direction = LoginScreenDestination
+                )
+                DrawerItem.User -> navigator.navigateWithPopUp(
+                    currentRoute = currentPage.toRoute(),
+                    direction = UserScreenDestination.invoke(username = "MyUsername")
+                )
             }
         }
     )
 }
 
-private fun DestinationsNavigator.list(currentRoute: String) {
-    navigate(direction = ListScreenDestination) {
-        popUpTo(route = currentRoute) {
-            inclusive = true
-        }
-    }
-}
-
-private fun DestinationsNavigator.logout(currentRoute: String) {
-    navigate(direction = LoginScreenDestination) {
-        popUpTo(route = currentRoute) {
-            inclusive = true
-        }
-    }
-}
-
-private fun DestinationsNavigator.user(currentRoute: String, argument: String) {
-    navigate(direction = UserScreenDestination.invoke(username = argument)) {
+private fun DestinationsNavigator.navigateWithPopUp(currentRoute: String, direction: Direction) {
+    navigate(direction = direction) {
         popUpTo(route = currentRoute) {
             inclusive = true
         }
